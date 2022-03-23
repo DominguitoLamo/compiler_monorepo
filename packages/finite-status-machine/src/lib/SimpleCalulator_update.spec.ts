@@ -1,6 +1,6 @@
 import { AstNodeType } from "../enum/AstNodeType";
 
-import { evaluate, token2AST } from "./SimpleCalculator";
+import { evaluate, token2AST } from "./SimpleCalculator_update";
 
 describe('Convert to AST', () => {
   it('parseAdditive', () => {

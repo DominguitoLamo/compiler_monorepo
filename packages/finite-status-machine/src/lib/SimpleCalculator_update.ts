@@ -48,20 +48,27 @@ export function intDeclare(tokenReader: SimpleTokenReader) {
 }
 
 function additive(tokenReader: SimpleTokenReader) {
-  const child1 = multiplicative(tokenReader);
+  let child1 = multiplicative(tokenReader);
   let node = child1;
 
-  let token = tokenReader.peek();
-  if (child1 && token) {
-    if (token.type === DfaState.Plus || token.type === DfaState.Minus) {
-      token = tokenReader.read();
-      const child2 = additive(tokenReader);
-      if (child2) {
-        node = new SimpleASTNode(AstNodeType.Additive, token.text);
-        node.addChildren(child1);
-        node.addChildren(child2);
+  if (child1) {
+    while (true) {
+      let token = tokenReader.peek();
+  
+      if (token && (token.type === DfaState.Plus || token.type === DfaState.Minus)) {
+        token = tokenReader.read();
+        const child2 = multiplicative(tokenReader);
+  
+        if (child2) {
+          node = new SimpleASTNode(AstNodeType.Additive, token.text);
+          node.addChildren(child1);
+          node.addChildren(child2);
+          child1 = node;
+        } else {
+          throw new Error('Invalid Expression. Expecting another Intliteral');
+        }
       } else {
-        throw new Error('Invalid Expression. Expecting another Intliteral');
+        break;
       }
     }
   }
