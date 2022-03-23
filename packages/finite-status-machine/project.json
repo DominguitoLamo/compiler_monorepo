@@ -1,0 +1,32 @@
+{
+  "root": "packages/finite-status-machine",
+  "sourceRoot": "packages/finite-status-machine/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/finite-status-machine",
+        "main": "packages/finite-status-machine/src/index.ts",
+        "tsConfig": "packages/finite-status-machine/tsconfig.lib.json",
+        "assets": ["packages/finite-status-machine/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/finite-status-machine/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/finite-status-machine"],
+      "options": {
+        "jestConfig": "packages/finite-status-machine/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
