@@ -1,7 +1,8 @@
-import { evaluate } from './lib/SimpleCalculator_update';
+import { evaluate } from './lib/SimpleParser';
 
 export * from './lib/SimpleCalculator';
 export * from './lib/simpleLexer';
 
-const result = evaluate('5 + 5 + 14');
+evaluate('int a = 1 + 12;');
+const result = evaluate('1 + a;');
 console.log(result);
